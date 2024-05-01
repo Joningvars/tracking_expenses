@@ -8,11 +8,22 @@ const uuid = Uuid();
 
 enum Category { food, travel, leisure, work }
 
+enum TransactionType { income, expense }
+
+enum IncomeCategory { salary, sales, business, other }
+
 const categoryIcons = {
   Category.food: Icons.lunch_dining,
   Category.travel: Icons.flight_takeoff,
   Category.leisure: Icons.movie,
   Category.work: Icons.work,
+};
+
+const incomeCategoryIcons = {
+  IncomeCategory.business: Icons.cases,
+  IncomeCategory.other: Icons.question_mark,
+  IncomeCategory.salary: Icons.monetization_on,
+  IncomeCategory.sales: Icons.wallet,
 };
 
 class Expense {
@@ -21,13 +32,15 @@ class Expense {
   final double amount;
   final DateTime date;
   final Category category;
+  final TransactionType type;
 
-  Expense({
-    required this.amount,
-    required this.date,
-    required this.title,
-    required this.category,
-  }) : id = uuid.v4();
+  Expense(
+      {required this.amount,
+      required this.date,
+      required this.title,
+      required this.category,
+      required this.type})
+      : id = uuid.v4();
 
   String get formattedDate {
     return formatter.format(date);
